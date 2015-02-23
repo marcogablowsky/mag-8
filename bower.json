@@ -1,0 +1,22 @@
+{
+  "name": "mag-8",
+  "version": "1.0.0",
+  "authors": [],
+  "description": "Chip 8 emulator",
+  "license": "",
+  "homepage": "http://www.github.com/marcogablowsky/mag-8",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+
+  },
+  "devDependencies": {
+
+  }
+}

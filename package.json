@@ -1,0 +1,15 @@
+{
+    "name": "mag-8",
+    "version": "1.0.0",
+    "dependencies": {},
+    "devDependencies": {
+        "karma": "latest",
+        "karma-coverage": "latest",
+        "karma-jasmine": "latest",
+        "karma-phantomjs-launcher": "latest",
+        "karma-chrome-launcher": "latest"
+    },
+    "engines": {
+        "node": ">=0.10.0"
+    }
+}
