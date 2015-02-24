@@ -40,13 +40,20 @@ MAG.mag8.Memory = function(){
     };
 
     var _checkAddress = function(address){
-        if(address < 0 || address > 0x1000){
+        if(address < 0 || address > 0xfff){
             throw new Error('Invalid address '+address);
+        }
+    };
+
+    var _checkValue = function(value){
+        if(value < 0 || value > 0xff){
+            throw new Error('Invalid value '+value);
         }
     };
 
     var store = function(value, address){
         _checkAddress(address);
+        _checkValue(value);
         mem[address] = value;
     };
 
