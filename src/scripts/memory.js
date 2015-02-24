@@ -33,8 +33,7 @@ MAG.mag8.Memory = function(){
     var mem = new Uint8Array(0x1000);
 
     var reset = function(){
-        var i = 0;
-        for( i ; i < mem.length; i++){
+        for(var i = 0; i < mem.length; i++){
             mem[i] = 0;
         }
     };
