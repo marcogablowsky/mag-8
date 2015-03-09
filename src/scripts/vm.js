@@ -4,31 +4,13 @@ MAG.mag8.VM = (function() {
 
     var cpu = MAG.mag8.CPU();
     var memory = MAG.mag8.Memory();
+    var display = MAG.mag8.Display();
 
     var running = false;
 
-    var initMemory = function(){
-        var hexChars = [
-            0xF0, 0x90, 0x90, 0x90, 0xF0, // 0
-            0x20, 0x60, 0x20, 0x20, 0x70, // 1
-            0xF0, 0x10, 0xF0, 0x80, 0xF0, // 2
-            0xF0, 0x10, 0xF0, 0x10, 0xF0, // 3
-            0x90, 0x90, 0xF0, 0x10, 0x10, // 4
-            0xF0, 0x80, 0xF0, 0x10, 0xF0, // 5
-            0xF0, 0x80, 0xF0, 0x90, 0xF0, // 6
-            0xF0, 0x10, 0x20, 0x40, 0x40, // 7
-            0xF0, 0x90, 0xF0, 0x90, 0xF0, // 8
-            0xF0, 0x90, 0xF0, 0x10, 0xF0, // 9
-            0xF0, 0x90, 0xF0, 0x90, 0x90, // A
-            0xE0, 0x90, 0xE0, 0x90, 0xE0, // B
-            0xF0, 0x80, 0x80, 0x80, 0xF0, // C
-            0xE0, 0x90, 0x90, 0x90, 0xE0, // D
-            0xF0, 0x80, 0xF0, 0x80, 0xF0, // E
-            0xF0, 0x80, 0xF0, 0x80, 0x80  // F
-        ];
-
-        for(var i = 0; i < hexChars.length; i++){
-            memory.store(i,hexChars[i]);
+    var _initMemory = function(){
+        for(var i = 0; i < MAG.mag8.Constants.hexChars.length; i++){
+            memory.store(i,MAG.mag8.Constants.hexChars[i]);
         };
     };
 
@@ -36,7 +18,7 @@ MAG.mag8.VM = (function() {
         running = false;
         cpu.reset();
         memory.reset();
-        initMemory();
+        _initMemory();
     };
 
     var start = function(){
@@ -52,7 +34,7 @@ MAG.mag8.VM = (function() {
     };
 
     // initialize memory on creation
-    initMemory();
+    _initMemory();
 
     return {
         reset: reset,
