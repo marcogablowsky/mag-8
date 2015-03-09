@@ -31,6 +31,7 @@ MAG.mag8.Memory = function(){
      */
 
     var mem = new Uint8Array(0x1000);
+    var maxValue = 0xff;
 
     var reset = function(){
         for(var i = 0; i < mem.length; i++){
@@ -39,13 +40,13 @@ MAG.mag8.Memory = function(){
     };
 
     var _checkAddress = function(address){
-        if(address < 0 || address > 0xfff){
+        if(address < 0 || address >= mem.length){
             throw new Error('Invalid address '+address);
         }
     };
 
     var _checkValue = function(value){
-        if(value < 0 || value > 0xff){
+        if(value < 0 || value > maxValue){
             throw new Error('Invalid value '+value);
         }
     };
