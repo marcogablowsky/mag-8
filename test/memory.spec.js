@@ -3,7 +3,7 @@ describe('MAG8 memory:', function(){
     var mem;
 
     beforeEach(function(){
-        mem = new MAG.mag8.Memory;
+        mem = MAG.mag8.Memory('8-bit',0x1000);
     });
 
     describe('interface',function() {

@@ -1,52 +1,47 @@
 'use strict';
 
-MAG.mag8.Memory = function(){
+MAG.mag8.Memory = function(type, size){
 
-    /* 4k Main memory
-     Memory Map:
-     +---------------+= 0xFFF (4095) End of Chip-8 RAM
-     |               |
-     |               |
-     |               |
-     |               |
-     |               |
-     | 0x200 to 0xFFF|
-     |     Chip-8    |
-     | Program / Data|
-     |     Space     |
-     |               |
-     |               |
-     |               |
-     +- - - - - - - -+= 0x600 (1536) Start of ETI 660 Chip-8 programs
-     |               |
-     |               |
-     |               |
-     +---------------+= 0x200 (512) Start of most Chip-8 programs
-     | 0x000 to 0x1FF|
-     | Reserved for  |
-     |  interpreter  |
-     +---------------+= 0x000 (0) Start of Chip-8 RAM
+    var _validateParams = function(type,size){
+        if(typeof type != 'string'){
+            throw new Error('Type parameter must be a string');
+        }
+        if(typeof size != 'number'){
+            throw new Error('Size parameter must be a number');
+        }
+    };
 
-     Taken from http://devernay.free.fr/hacks/chip8/C8TECH10.HTM
-     */
+    var _init = function(type, size){
+        _validateParams(type,size);
+        var mem = {};
+        if(type === '8-bit'){
+            mem.data = new Uint8Array(size);
+            mem.maxVal = 0xff;
+        }else if(type === '16-bit'){
+            mem.data = new Uint16Array(size);
+            mem.maxVal = 0xffff;
+        }else{
+            throw new Error('unsupported memory type '+type);
+        }
+        return mem;
+    };
 
-    var mem = new Uint8Array(0x1000);
-    var maxValue = 0xff;
+    var mem = _init(type,size);
 
     var reset = function(){
-        for(var i = 0; i < mem.length; i++){
-            mem[i] = 0;
+        for(var i = 0; i < mem.data.length; i++){
+            mem.data[i] = 0;
         }
     };
 
     var _checkAddress = function(address){
-        if(address < 0 || address >= mem.length){
+        if(address < 0 || address >= mem.data.length){
             throw new Error('Invalid address '+address);
         }
     };
 
     var _checkValue = function(value){
-        if(value < 0 || value > maxValue){
+        if(value < 0 || value > mem.maxVal){
             throw new Error('Invalid value '+value);
         }
     };
@@ -54,12 +49,12 @@ MAG.mag8.Memory = function(){
     var store = function(value, address){
         _checkAddress(address);
         _checkValue(value);
-        mem[address] = value;
+        mem.data[address] = value;
     };
 
     var get = function(address){
         _checkAddress(address);
-        return mem[address];
+        return mem.data[address];
     };
 
     return {
