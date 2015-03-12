@@ -30,6 +30,6 @@ MAG.mag8.CPU = function(memory){
     return {
         reset: reset,
         emulateCycle: emulateCycle
-    }
+    };
 
 };
