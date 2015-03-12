@@ -1,32 +1,35 @@
 'use strict';
 
-MAG.mag8.CPU = function(){
+MAG.mag8.CPU = function(memory){
+
+    var mem = memory;
+    var registers = MAG.mag8.Registers();
+    var timers = MAG.mag8.Timers();
 
     // 16-Bit program counter
     var pc = null;
 
     // 16 x 16-Bit stack
-    var stack = new Uint16Array(0x10);
+    var stack = MAG.mag8.Memory('16-bit',0x10);
 
     // stack pointer
     var sp = null;
 
-    // define sixteen Vx (0-F) general purpose 8-Bit registers, last is used for 'carry-flag'
-    var v = new Uint8Array(0x10);
-
-    // 16-Bit register, mainly used to store memory addresses
-    var i = null;
-
-    // special 8-Bit registers, automatically decremented at 60hz if non-zero
-    var delayTimer = null;
-    var soundTimer = null;
-
     var reset = function(){
+        registers.reset();
+        timers.reset();
+        stack.reset();
+        pc = null;
+        sp = null;
+    };
+
+    var emulateCycle = function(){
 
     };
 
     return {
-        reset: reset
+        reset: reset,
+        emulateCycle: emulateCycle
     }
 
 };

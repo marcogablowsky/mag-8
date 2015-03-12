@@ -2,8 +2,8 @@
 
 MAG.mag8.VM = (function() {
 
-    var cpu = MAG.mag8.CPU();
-    var memory = MAG.mag8.Memory();
+    var memory = MAG.mag8.Memory('8-bit',0x1000);
+    var cpu = MAG.mag8.CPU(memory);
     var display = MAG.mag8.Display();
 
     var running = false;
@@ -18,6 +18,7 @@ MAG.mag8.VM = (function() {
         running = false;
         cpu.reset();
         memory.reset();
+        display.reset();
         _initMemory();
     };
 
