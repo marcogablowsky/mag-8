@@ -1,18 +1,37 @@
 'use strict';
 
-MAG.mag8.CPU = function (memory) {
+MAG.mag8.CPU = function (memory,display) {
 
     var mem = memory;
+    var screen = display;
+
     var opcodeDecoder = MAG.mag8.OpcodeDecoder();
     var registers = MAG.mag8.Registers();
     var timers = MAG.mag8.Timers();
 
     var stack = MAG.mag8.Memory('16-bit', 0x10);
-    var stackPointer = null;
+    var stackPointer = -1;
 
     var ip = null; //instruction pointer
 
-    var operations = {};
+    var operations = {
+        CLS: function(){
+            screen.reset();
+        },
+
+        RET: function(){
+            ip = stack.get(stackPointer--);
+        },
+
+        JP: function(args){
+            ip = args.address;
+        },
+
+        CALL: function(args){
+            stack.store(ip,++stackPointer);
+            ip = args.address;
+        }
+    };
 
     var reset = function () {
         registers.reset();
@@ -42,5 +61,4 @@ MAG.mag8.CPU = function (memory) {
         reset: reset,
         emulateCycle: emulateCycle
     };
-
 };
