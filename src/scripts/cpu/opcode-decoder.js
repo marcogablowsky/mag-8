@@ -21,12 +21,16 @@ MAG.mag8.OpcodeDecoder = function(){
                 return {ref: 'CALL', args: {address: opcode & 0x0FFF}};
 
             case 0x3000:
-                // Skip next instruction if vX equals kk
+                // Skip next instruction if Vx equals kk
                 return {ref: 'SE', args: {x: (opcode & 0x0F00) >> 8, kk: opcode & 0x00FF}}
 
             case 0x4000:
-                // Skip next instruction if vX not equals kk
+                // Skip next instruction if Vx not equals kk
                 return {ref: 'SNE', args: {x: (opcode & 0x0F00) >> 8, kk: opcode & 0x00FF}}
+
+            case 0x5000:
+                // Skip next instruction if Vx equals Vy
+                return {ref: 'SEV', args: {x: (opcode & 0x0F00) >> 8, y: (opcode & 0x00F0) >> 4}}
         }
     };
 

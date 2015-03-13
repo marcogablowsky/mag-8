@@ -67,5 +67,16 @@ describe('MAG8 opcode decoder:', function() {
             expect(op.args.kk).toBeDefined();
             expect(op.args.kk).toEqual(0xa9);
         });
+
+        it('should decode 0x5xy0 to SEV with x and y arguments', function(){
+            var op = decoder.decode(0x5da0);
+            expect(op.ref).toBeDefined();
+            expect(op.ref).toEqual('SEV');
+            expect(op.args).toBeDefined();
+            expect(op.args.x).toBeDefined();
+            expect(op.args.x).toEqual(0xd);
+            expect(op.args.y).toBeDefined();
+            expect(op.args.y).toEqual(0xa);
+        });
     });
 });
