@@ -45,5 +45,27 @@ describe('MAG8 opcode decoder:', function() {
             expect(op.args.address).toBeDefined();
             expect(op.args.address).toEqual(0xfff);
         });
+
+        it('should decode 0x3xkk to SE with x and kk arguments', function(){
+            var op = decoder.decode(0x3aff);
+            expect(op.ref).toBeDefined();
+            expect(op.ref).toEqual('SE');
+            expect(op.args).toBeDefined();
+            expect(op.args.x).toBeDefined();
+            expect(op.args.x).toEqual(0xa);
+            expect(op.args.kk).toBeDefined();
+            expect(op.args.kk).toEqual(0xff);
+        });
+
+        it('should decode 0x4xkk to SNE with x and kk arguments', function(){
+            var op = decoder.decode(0x4da9);
+            expect(op.ref).toBeDefined();
+            expect(op.ref).toEqual('SNE');
+            expect(op.args).toBeDefined();
+            expect(op.args.x).toBeDefined();
+            expect(op.args.x).toEqual(0xd);
+            expect(op.args.kk).toBeDefined();
+            expect(op.args.kk).toEqual(0xa9);
+        });
     });
 });

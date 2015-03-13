@@ -30,6 +30,18 @@ MAG.mag8.CPU = function (memory,display) {
         CALL: function(args){
             stack.store(ip,++stackPointer);
             ip = args.address;
+        },
+
+        SE: function(args){
+            if(registers.getV(args.x) === args.kk){
+                ip += 2; // skip one instruction
+            }
+        },
+
+        SNE: function(args){
+            if(registers.getV(args.x) !== args.kk){
+                ip += 2; // skip one instruction
+            }
         }
     };
 
