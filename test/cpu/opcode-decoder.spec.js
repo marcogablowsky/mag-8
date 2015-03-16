@@ -78,5 +78,16 @@ describe('MAG8 opcode decoder:', function() {
             expect(op.args.y).toBeDefined();
             expect(op.args.y).toEqual(0xa);
         });
+
+        it('should decode 0x6xkk to LDxkk with x and kk arguments', function(){
+            var op = decoder.decode(0x6a99);
+            expect(op.ref).toBeDefined();
+            expect(op.ref).toEqual('LDxkk');
+            expect(op.args).toBeDefined();
+            expect(op.args.x).toBeDefined();
+            expect(op.args.x).toEqual(0xa);
+            expect(op.args.kk).toBeDefined();
+            expect(op.args.kk).toEqual(0x99);
+        });
     });
 });

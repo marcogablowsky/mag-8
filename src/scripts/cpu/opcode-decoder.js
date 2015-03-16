@@ -2,6 +2,14 @@
 
 MAG.mag8.OpcodeDecoder = function(){
 
+    var _xkkArgs = function(opcode){
+        return {x: (opcode & 0x0F00) >> 8, kk: opcode & 0x00FF};
+    };
+
+    var _xyArgs = function(opcode){
+        return {x: (opcode & 0x0F00) >> 8, y: (opcode & 0x00F0) >> 4};
+    };
+
     var _decode0xxx = function(opcode){
         switch(opcode){
             case 0x00E0: return {ref: 'CLS'};
@@ -22,15 +30,18 @@ MAG.mag8.OpcodeDecoder = function(){
 
             case 0x3000:
                 // Skip next instruction if Vx equals kk
-                return {ref: 'SE', args: {x: (opcode & 0x0F00) >> 8, kk: opcode & 0x00FF}}
+                return {ref: 'SE', args: _xkkArgs(opcode)};
 
             case 0x4000:
                 // Skip next instruction if Vx not equals kk
-                return {ref: 'SNE', args: {x: (opcode & 0x0F00) >> 8, kk: opcode & 0x00FF}}
+                return {ref: 'SNE', args: _xkkArgs(opcode)};
 
             case 0x5000:
                 // Skip next instruction if Vx equals Vy
-                return {ref: 'SEV', args: {x: (opcode & 0x0F00) >> 8, y: (opcode & 0x00F0) >> 4}}
+                return {ref: 'SEV', args: _xyArgs(opcode)};
+
+            case 0x6000:
+                return {ref: 'LDxkk', args: _xkkArgs(opcode)};
         }
     };
 
@@ -38,4 +49,3 @@ MAG.mag8.OpcodeDecoder = function(){
         decode: decode
     }
 };
-

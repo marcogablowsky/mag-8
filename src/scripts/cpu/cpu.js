@@ -48,6 +48,10 @@ MAG.mag8.CPU = function (memory,display) {
             if(registers.getV(args.x) === registers.getV(args.y)){
                 ip += 2; // skip one instruction
             }
+        },
+
+        LDxkk: function(args){
+            registers.storeV(args.x, args.kk);
         }
     };
 
