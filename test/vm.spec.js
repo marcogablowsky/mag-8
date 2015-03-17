@@ -3,13 +3,18 @@ describe('MAG8 virtual machine:', function() {
     var vm;
 
     beforeEach(function () {
-        vm = MAG.mag8.VM;
+        vm = MAG.mag8.VM();
     });
 
     describe('interface', function() {
         it('should define a reset method', function () {
             expect(vm.reset).toBeDefined();
             expect(typeof vm.reset).toEqual('function');
+        });
+
+        it('should define a step method', function () {
+            expect(vm.step).toBeDefined();
+            expect(typeof vm.step).toEqual('function');
         });
 
         it('should define a start method', function () {

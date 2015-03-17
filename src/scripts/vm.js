@@ -1,6 +1,6 @@
 'use strict';
 
-MAG.mag8.VM = (function() {
+MAG.mag8.VM = function() {
 
     var memory = MAG.mag8.Memory('8-bit',0x1000);
     var display = MAG.mag8.Display();
@@ -11,7 +11,7 @@ MAG.mag8.VM = (function() {
     var _initMemory = function(){
         for(var i = 0; i < MAG.mag8.Constants.hexChars.length; i++){
             memory.store(i,MAG.mag8.Constants.hexChars[i]);
-        };
+        }
     };
 
     var reset = function(){
@@ -20,6 +20,10 @@ MAG.mag8.VM = (function() {
         memory.reset();
         display.reset();
         _initMemory();
+    };
+
+    var step = function(){
+        cpu.emulateCycle();
     };
 
     var start = function(){
@@ -39,9 +43,10 @@ MAG.mag8.VM = (function() {
 
     return {
         reset: reset,
+        step: step,
         start: start,
         stop: stop,
         isRunning: isRunning
     };
 
-})();
+};
