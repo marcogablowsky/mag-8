@@ -2,6 +2,10 @@
 
 MAG.mag8.OpcodeDecoder = function(){
 
+    var _addressArgs = function(opcode){
+        return {address: opcode & 0x0FFF};
+    };
+
     var _xkkArgs = function(opcode){
         return {x: (opcode & 0x0F00) >> 8, kk: opcode & 0x00FF};
     };
@@ -23,10 +27,10 @@ MAG.mag8.OpcodeDecoder = function(){
                 return _decode0xxx(opcode);
 
             case 0x1000:
-                return {ref: 'JP', args: {address: opcode & 0x0FFF}};
+                return {ref: 'JP', args: _addressArgs(opcode)};
 
             case 0x2000:
-                return {ref: 'CALL', args: {address: opcode & 0x0FFF}};
+                return {ref: 'CALL', args: _addressArgs(opcode)};
 
             case 0x3000:
                 // Skip next instruction if Vx equals kk
@@ -47,5 +51,5 @@ MAG.mag8.OpcodeDecoder = function(){
 
     return {
         decode: decode
-    }
+    };
 };
