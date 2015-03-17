@@ -4,7 +4,8 @@ MAG.mag8.VM = function() {
 
     var memory = MAG.mag8.Memory('8-bit',0x1000);
     var display = MAG.mag8.Display();
-    var cpu = MAG.mag8.CPU(memory,display);
+    var controls = MAG.mag8.Controls();
+    var cpu = MAG.mag8.CPU(memory,display,controls);
 
     var running = false;
 
