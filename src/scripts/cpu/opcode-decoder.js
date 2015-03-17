@@ -78,6 +78,15 @@ MAG.mag8.OpcodeDecoder = function(){
 
             case 0x9000:
                 return {ref: 'SNExy', args: _xyArgs(opcode)};
+
+            case 0xA000:
+                return {ref: 'LD', args: _addressArgs(opcode)};
+
+            case 0xB000:
+                return {ref: 'JPv0', args: _addressArgs(opcode)};
+
+            case 0xC000:
+                return {ref: 'RNDxkk', args: _xkkArgs(opcode)};
         }
     };
 

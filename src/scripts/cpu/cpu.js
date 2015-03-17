@@ -28,6 +28,10 @@ MAG.mag8.CPU = function (memory,display,controls) {
             ip = args.address;
         },
 
+        JPv0: function(args){
+            ip = args.address + registers.getV(0x0);
+        },
+
         CALL: function(args){
             stack.store(ip,++stackPointer);
             ip = args.address;
@@ -55,6 +59,10 @@ MAG.mag8.CPU = function (memory,display,controls) {
             if(registers.getV(args.x) !== registers.getV(args.y)){
                 ip += 2; // skip one instruction
             }
+        },
+
+        LD: function(args){
+            registers.storeI(args.address);
         },
 
         LDxkk: function(args){
@@ -124,6 +132,10 @@ MAG.mag8.CPU = function (memory,display,controls) {
                 val -= 0xfff;
             }
             registers.storeV(args.x, val);
+        },
+
+        RNDxkk: function(args){
+            registers.storeV(args.x, Math.floor(Math.random() * 0xFF) & args.kk);
         }
 
     };
