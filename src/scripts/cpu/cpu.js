@@ -55,6 +55,10 @@ MAG.mag8.CPU = function (memory,display,controls) {
             registers.storeV(args.x, args.kk);
         },
 
+        LDxy: function(args){
+            registers.storeV(args.x, registers.getV(args.y));
+        },
+
         ADDxkk: function(args){
             var newVal = registers.getV(args.x) + args.kk;
             if(newVal > 0xff){
@@ -63,9 +67,59 @@ MAG.mag8.CPU = function (memory,display,controls) {
             registers.storeV(args.x, newVal);
         },
 
-        LDxy: function(args){
-            registers.storeV(args.x, registers.getV(args.y));
+        ADDxy: function(args){
+            var sum = registers.getV(args.x) + registers.getV(args.y);
+            registers.storeV(0xf, +(sum > 0xff)); // carry flag, 0 or 1
+            if(sum > 0xff){
+                sum -= 0xfff;
+            }
+            registers.storeV(args.x, sum);
+        },
+
+        SUBxy: function(args){
+            var diff = registers.getV(args.x) - registers.getV(args.y);
+            registers.storeV(0xf, +(registers.getV(args.x) > registers.getV(args.y))); // carry flag, 0 or 1
+            if(diff < 0){
+                diff += 0xfff;
+            }
+            registers.storeV(args.x, diff);
+        },
+
+        SUBNxy: function(args){
+            var diff = registers.getV(args.y) - registers.getV(args.x);
+            registers.storeV(0xf, +(registers.getV(args.y) > registers.getV(args.x)));
+            if (diff < 0) {
+                diff += 0xfff;
+            }
+            registers.storeV(args.x, diff);
+        },
+
+        ORxy: function(args){
+            registers.storeV(args.x, registers.getV(args.x) | registers.getV(args.y));
+        },
+
+        ANDxy: function(args){
+            registers.storeV(args.x, registers.getV(args.x) & registers.getV(args.y));
+        },
+
+        XORxy: function(args){
+            registers.storeV(args.x, registers.getV(args.x) ^ registers.getV(args.y));
+        },
+
+        SHRxy: function(args){
+            registers.storeV(0xf, registers.getV(args.x) & 0x1);
+            registers.storeV(args.x, registers.getV(args.x) >> 1);
+        },
+
+        SHLxy: function(args){
+            registers.storeV(0xf, registers.getV(args.x) & 0x80);
+            var val = registers.getV(args.x) << 1;
+            if(val > 0xff){
+                val -= 0xfff;
+            }
+            registers.storeV(args.x, val);
         }
+
     };
 
     var _handleTimers = function(){

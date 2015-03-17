@@ -111,5 +111,93 @@ describe('MAG8 opcode decoder:', function() {
             expect(op.args.y).toBeDefined();
             expect(op.args.y).toEqual(0xa);
         });
+
+        it('should decode 0x8xy1 to ORxy with x and y arguments', function(){
+            var op = decoder.decode(0x8da1);
+            expect(op.ref).toBeDefined();
+            expect(op.ref).toEqual('ORxy');
+            expect(op.args).toBeDefined();
+            expect(op.args.x).toBeDefined();
+            expect(op.args.x).toEqual(0xd);
+            expect(op.args.y).toBeDefined();
+            expect(op.args.y).toEqual(0xa);
+        });
+
+        it('should decode 0x8xy2 to ANDxy with x and y arguments', function(){
+            var op = decoder.decode(0x8da2);
+            expect(op.ref).toBeDefined();
+            expect(op.ref).toEqual('ANDxy');
+            expect(op.args).toBeDefined();
+            expect(op.args.x).toBeDefined();
+            expect(op.args.x).toEqual(0xd);
+            expect(op.args.y).toBeDefined();
+            expect(op.args.y).toEqual(0xa);
+        });
+
+        it('should decode 0x8xy3 to XORxy with x and y arguments', function(){
+            var op = decoder.decode(0x8da3);
+            expect(op.ref).toBeDefined();
+            expect(op.ref).toEqual('XORxy');
+            expect(op.args).toBeDefined();
+            expect(op.args.x).toBeDefined();
+            expect(op.args.x).toEqual(0xd);
+            expect(op.args.y).toBeDefined();
+            expect(op.args.y).toEqual(0xa);
+        });
+
+        it('should decode 0x8xy4 to ADDxy with x and y arguments', function(){
+            var op = decoder.decode(0x8da4);
+            expect(op.ref).toBeDefined();
+            expect(op.ref).toEqual('ADDxy');
+            expect(op.args).toBeDefined();
+            expect(op.args.x).toBeDefined();
+            expect(op.args.x).toEqual(0xd);
+            expect(op.args.y).toBeDefined();
+            expect(op.args.y).toEqual(0xa);
+        });
+
+        it('should decode 0x8xy5 to SUBxy with x and y arguments', function(){
+            var op = decoder.decode(0x8da5);
+            expect(op.ref).toBeDefined();
+            expect(op.ref).toEqual('SUBxy');
+            expect(op.args).toBeDefined();
+            expect(op.args.x).toBeDefined();
+            expect(op.args.x).toEqual(0xd);
+            expect(op.args.y).toBeDefined();
+            expect(op.args.y).toEqual(0xa);
+        });
+
+        it('should decode 0x8xy6 to SHRxy with x and y arguments', function(){
+            var op = decoder.decode(0x8da6);
+            expect(op.ref).toBeDefined();
+            expect(op.ref).toEqual('SHRxy');
+            expect(op.args).toBeDefined();
+            expect(op.args.x).toBeDefined();
+            expect(op.args.x).toEqual(0xd);
+            expect(op.args.y).toBeDefined();
+            expect(op.args.y).toEqual(0xa);
+        });
+
+        it('should decode 0x8xy7 to SUBNxy with x and y arguments', function(){
+            var op = decoder.decode(0x8da7);
+            expect(op.ref).toBeDefined();
+            expect(op.ref).toEqual('SUBNxy');
+            expect(op.args).toBeDefined();
+            expect(op.args.x).toBeDefined();
+            expect(op.args.x).toEqual(0xd);
+            expect(op.args.y).toBeDefined();
+            expect(op.args.y).toEqual(0xa);
+        });
+
+        it('should decode 0x8xyE to SHLxy with x and y arguments', function(){
+            var op = decoder.decode(0x8daE);
+            expect(op.ref).toBeDefined();
+            expect(op.ref).toEqual('SHLxy');
+            expect(op.args).toBeDefined();
+            expect(op.args.x).toBeDefined();
+            expect(op.args.x).toEqual(0xd);
+            expect(op.args.y).toBeDefined();
+            expect(op.args.y).toEqual(0xa);
+        });
     });
 });
