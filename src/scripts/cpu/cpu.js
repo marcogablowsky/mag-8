@@ -1,9 +1,10 @@
 'use strict';
 
-MAG.mag8.CPU = function (memory,display) {
+MAG.mag8.CPU = function (memory,display,controls) {
 
     var mem = memory;
     var screen = display;
+    var input = controls;  // jshint ignore:line
 
     var opcodeDecoder = MAG.mag8.OpcodeDecoder();
     var registers = MAG.mag8.Registers();
@@ -12,7 +13,7 @@ MAG.mag8.CPU = function (memory,display) {
     var stack = MAG.mag8.Memory('16-bit', 0x10);
     var stackPointer = -1;
 
-    var ip = null; //instruction pointer
+    var ip = 0x200; //instruction pointer
 
     var operations = {
         CLS: function(){
@@ -55,11 +56,15 @@ MAG.mag8.CPU = function (memory,display) {
         }
     };
 
+    var _handleTimers = function(){
+        //TODO: Timer handling on emulation cycle
+    };
+
     var reset = function () {
         registers.reset();
         timers.reset();
         stack.reset();
-        ip = null;
+        ip = 0x200;
         stackPointer = null;
     };
 
@@ -72,11 +77,13 @@ MAG.mag8.CPU = function (memory,display) {
         var operation = opcodeDecoder.decode(opcode);
 
         //execute
-        if (operations[operation.ref]) {
+        if (operation && operations[operation.ref]) {
             operations[operation.ref](operation.args);
         } else {
             throw new Error('Undefined CPU operation detected: opcode ' + (opcode).toString(16));
         }
+
+        _handleTimers();
     };
 
     return {
