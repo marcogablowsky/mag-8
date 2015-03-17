@@ -33,20 +33,26 @@ MAG.mag8.CPU = function (memory,display,controls) {
             ip = args.address;
         },
 
-        SE: function(args){
+        SExkk: function(args){
             if(registers.getV(args.x) === args.kk){
                 ip += 2; // skip one instruction
             }
         },
 
-        SNE: function(args){
+        SExy: function(args){
+            if(registers.getV(args.x) === registers.getV(args.y)){
+                ip += 2; // skip one instruction
+            }
+        },
+
+        SNExkk: function(args){
             if(registers.getV(args.x) !== args.kk){
                 ip += 2; // skip one instruction
             }
         },
 
-        SEV: function(args){
-            if(registers.getV(args.x) === registers.getV(args.y)){
+        SNExy: function(args){
+            if(registers.getV(args.x) !== registers.getV(args.y)){
                 ip += 2; // skip one instruction
             }
         },

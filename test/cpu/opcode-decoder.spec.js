@@ -46,10 +46,10 @@ describe('MAG8 opcode decoder:', function() {
             expect(op.args.address).toEqual(0xfff);
         });
 
-        it('should decode 0x3xkk to SE with x and kk arguments', function(){
+        it('should decode 0x3xkk to SExkk with x and kk arguments', function(){
             var op = decoder.decode(0x3aff);
             expect(op.ref).toBeDefined();
-            expect(op.ref).toEqual('SE');
+            expect(op.ref).toEqual('SExkk');
             expect(op.args).toBeDefined();
             expect(op.args.x).toBeDefined();
             expect(op.args.x).toEqual(0xa);
@@ -57,10 +57,10 @@ describe('MAG8 opcode decoder:', function() {
             expect(op.args.kk).toEqual(0xff);
         });
 
-        it('should decode 0x4xkk to SNE with x and kk arguments', function(){
+        it('should decode 0x4xkk to SNExkk with x and kk arguments', function(){
             var op = decoder.decode(0x4da9);
             expect(op.ref).toBeDefined();
-            expect(op.ref).toEqual('SNE');
+            expect(op.ref).toEqual('SNExkk');
             expect(op.args).toBeDefined();
             expect(op.args.x).toBeDefined();
             expect(op.args.x).toEqual(0xd);
@@ -68,10 +68,10 @@ describe('MAG8 opcode decoder:', function() {
             expect(op.args.kk).toEqual(0xa9);
         });
 
-        it('should decode 0x5xy0 to SEV with x and y arguments', function(){
+        it('should decode 0x5xy0 to SExy with x and y arguments', function(){
             var op = decoder.decode(0x5da0);
             expect(op.ref).toBeDefined();
-            expect(op.ref).toEqual('SEV');
+            expect(op.ref).toEqual('SExy');
             expect(op.args).toBeDefined();
             expect(op.args.x).toBeDefined();
             expect(op.args.x).toEqual(0xd);
@@ -193,6 +193,17 @@ describe('MAG8 opcode decoder:', function() {
             var op = decoder.decode(0x8daE);
             expect(op.ref).toBeDefined();
             expect(op.ref).toEqual('SHLxy');
+            expect(op.args).toBeDefined();
+            expect(op.args.x).toBeDefined();
+            expect(op.args.x).toEqual(0xd);
+            expect(op.args.y).toBeDefined();
+            expect(op.args.y).toEqual(0xa);
+        });
+
+        it('should decode 0x9xy0 to SNExy with x and y arguments', function(){
+            var op = decoder.decode(0x9da0);
+            expect(op.ref).toBeDefined();
+            expect(op.ref).toEqual('SNExy');
             expect(op.args).toBeDefined();
             expect(op.args.x).toBeDefined();
             expect(op.args.x).toEqual(0xd);

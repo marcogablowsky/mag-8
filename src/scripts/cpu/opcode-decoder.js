@@ -57,15 +57,15 @@ MAG.mag8.OpcodeDecoder = function(){
 
             case 0x3000:
                 // Skip next instruction if Vx equals kk
-                return {ref: 'SE', args: _xkkArgs(opcode)};
+                return {ref: 'SExkk', args: _xkkArgs(opcode)};
 
             case 0x4000:
                 // Skip next instruction if Vx not equals kk
-                return {ref: 'SNE', args: _xkkArgs(opcode)};
+                return {ref: 'SNExkk', args: _xkkArgs(opcode)};
 
             case 0x5000:
                 // Skip next instruction if Vx equals Vy
-                return {ref: 'SEV', args: _xyArgs(opcode)};
+                return {ref: 'SExy', args: _xyArgs(opcode)};
 
             case 0x6000:
                 return {ref: 'LDxkk', args: _xkkArgs(opcode)};
@@ -75,6 +75,9 @@ MAG.mag8.OpcodeDecoder = function(){
 
             case 0x8000:
                 return _decode8xxx(opcode);
+
+            case 0x9000:
+                return {ref: 'SNExy', args: _xyArgs(opcode)};
         }
     };
 
