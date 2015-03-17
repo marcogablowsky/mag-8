@@ -54,6 +54,20 @@ MAG.mag8.OpcodeDecoder = function(){
         }
     };
 
+    var _decodeFxxx = function(opcode){
+        switch(opcode & 0x00ff){
+            case 0x0007: return {ref: 'LDxDt', args: _xArgs(opcode)};
+            case 0x000A: return {ref: 'LDxK', args: _xArgs(opcode)};
+            case 0x0015: return {ref: 'LDDtx', args: _xArgs(opcode)};
+            case 0x0018: return {ref: 'LDStx', args: _xArgs(opcode)};
+            case 0x001E: return {ref: 'ADDix', args: _xArgs(opcode)};
+            case 0x0029: return {ref: 'LDFx', args: _xArgs(opcode)};
+            case 0x0033: return {ref: 'LDBx', args: _xArgs(opcode)};
+            case 0x0055: return {ref: 'LDIx', args: _xArgs(opcode)};
+            case 0x0065: return {ref: 'LDxI', args: _xArgs(opcode)};
+        }
+    };
+
     var decode = function(opcode){
         switch(opcode & 0xf000){
             case 0x0000: return _decode0xxx(opcode);
@@ -71,6 +85,7 @@ MAG.mag8.OpcodeDecoder = function(){
             case 0xC000: return {ref: 'RNDxkk', args: _xkkArgs(opcode)};
             case 0xD000: return {ref: 'DRWxyn', args: _xynArgs(opcode)};
             case 0xE000: return _decodeExxx(opcode);
+            case 0xF000: return _decodeFxxx(opcode);
         }
     };
 

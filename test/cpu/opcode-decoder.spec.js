@@ -200,5 +200,59 @@ describe('MAG8 opcode decoder:', function() {
             validateRef(op, 'DRWxyn');
             validateXynArgs(op,0x2, 0xa, 0x8);
         });
+
+        it('should decode 0xFx07 to LDxDt with x argument', function(){
+            var op = decoder.decode(0xF207);
+            validateRef(op, 'LDxDt');
+            validateXArg(op,0x2);
+        });
+
+        it('should decode 0xFx0A to LDxK with x argument', function(){
+            var op = decoder.decode(0xF20A);
+            validateRef(op, 'LDxK');
+            validateXArg(op,0x2);
+        });
+
+        it('should decode 0xFx15 to LDDtx with x argument', function(){
+            var op = decoder.decode(0xF215);
+            validateRef(op, 'LDDtx');
+            validateXArg(op,0x2);
+        });
+
+        it('should decode 0xFx18 to LDStx with x argument', function(){
+            var op = decoder.decode(0xF218);
+            validateRef(op, 'LDStx');
+            validateXArg(op,0x2);
+        });
+
+        it('should decode 0xFx1E to ADDix with x argument', function(){
+            var op = decoder.decode(0xF21E);
+            validateRef(op, 'ADDix');
+            validateXArg(op,0x2);
+        });
+
+        it('should decode 0xFx29 to LDFx with x argument', function(){
+            var op = decoder.decode(0xF229);
+            validateRef(op, 'LDFx');
+            validateXArg(op,0x2);
+        });
+
+        it('should decode 0xFx33 to LDBx with x argument', function(){
+            var op = decoder.decode(0xF233);
+            validateRef(op, 'LDBx');
+            validateXArg(op,0x2);
+        });
+
+        it('should decode 0xFx55 to LDIx with x argument', function(){
+            var op = decoder.decode(0xF255);
+            validateRef(op, 'LDIx');
+            validateXArg(op,0x2);
+        });
+
+        it('should decode 0xFx65 to LDxI with x argument', function(){
+            var op = decoder.decode(0xF265);
+            validateRef(op, 'LDxI');
+            validateXArg(op,0x2);
+        });
     });
 });
