@@ -21,6 +21,13 @@ MAG.mag8.OpcodeDecoder = function(){
         }
     };
 
+    var _decode8xxx = function(opcode){
+        switch(opcode & 0x000f){
+            case 0x0:
+                return {ref: 'LDxy', args: _xyArgs(opcode)};
+        }
+    };
+
     var decode = function(opcode){
         switch(opcode & 0xf000){
             case 0x0000:
@@ -46,6 +53,12 @@ MAG.mag8.OpcodeDecoder = function(){
 
             case 0x6000:
                 return {ref: 'LDxkk', args: _xkkArgs(opcode)};
+
+            case 0x7000:
+                return {ref: 'ADDxkk', args: _xkkArgs(opcode)};
+
+            case 0x8000:
+                return _decode8xxx(opcode);
         }
     };
 

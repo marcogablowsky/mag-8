@@ -53,6 +53,18 @@ MAG.mag8.CPU = function (memory,display,controls) {
 
         LDxkk: function(args){
             registers.storeV(args.x, args.kk);
+        },
+
+        ADDxkk: function(args){
+            var newVal = registers.getV(args.x) + args.kk;
+            if(newVal > 0xff){
+                newVal -= 0x100;
+            }
+            registers.storeV(args.x, newVal);
+        },
+
+        LDxy: function(args){
+            registers.storeV(args.x, registers.getV(args.y));
         }
     };
 
