@@ -21,12 +21,22 @@ describe('MAG8 opcode decoder:', function() {
         expect(obj.args.kk).toEqual(kk);
     };
 
-    var validateXyArgs = function(obj, x, y){
+    var validateXArg = function(obj, x){
         expect(obj.args).toBeDefined();
         expect(obj.args.x).toBeDefined();
         expect(obj.args.x).toEqual(x);
+    };
+
+    var validateXyArgs = function(obj, x, y){
+        validateXArg(obj,x);
         expect(obj.args.y).toBeDefined();
         expect(obj.args.y).toEqual(y);
+    };
+
+    var validateXynArgs = function(obj, x, y, n){
+        validateXyArgs(obj,x,y);
+        expect(obj.args.n).toBeDefined();
+        expect(obj.args.n).toEqual(n);
     };
 
     beforeEach(function () {
@@ -171,6 +181,24 @@ describe('MAG8 opcode decoder:', function() {
             var op = decoder.decode(0xCa99);
             validateRef(op, 'RNDxkk');
             validateXkkArgs(op,0xa,0x99);
+        });
+
+        it('should decode 0xEx9E to SKPx with x argument', function(){
+            var op = decoder.decode(0xE29E);
+            validateRef(op, 'SKPx');
+            validateXArg(op,0x2);
+        });
+
+        it('should decode 0xExA1 to SKNPx with x argument', function(){
+            var op = decoder.decode(0xE2A1);
+            validateRef(op, 'SKNPx');
+            validateXArg(op,0x2);
+        });
+
+        it('should decode 0xDxyn to DRWxyn with x,y and n arguments', function(){
+            var op = decoder.decode(0xD2A8);
+            validateRef(op, 'DRWxyn');
+            validateXynArgs(op,0x2, 0xa, 0x8);
         });
     });
 });

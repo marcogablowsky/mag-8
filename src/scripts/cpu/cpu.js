@@ -4,7 +4,7 @@ MAG.mag8.CPU = function (memory,display,controls) {
 
     var mem = memory;
     var screen = display;
-    var input = controls;  // jshint ignore:line
+    var input = controls;
 
     var opcodeDecoder = MAG.mag8.OpcodeDecoder();
     var registers = MAG.mag8.Registers();
@@ -57,6 +57,18 @@ MAG.mag8.CPU = function (memory,display,controls) {
 
         SNExy: function(args){
             if(registers.getV(args.x) !== registers.getV(args.y)){
+                ip += 2; // skip one instruction
+            }
+        },
+
+        SKPx: function(args){
+            if(input.isPressed(registers.getV(args.x))){
+                ip += 2; // skip one instruction
+            }
+        },
+
+        SKNPx: function(args){
+            if(!input.isPressed(registers.getV(args.x))){
                 ip += 2; // skip one instruction
             }
         },
