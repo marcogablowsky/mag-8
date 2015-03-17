@@ -3,10 +3,10 @@
 MAG.mag8.Memory = function(type, size){
 
     var _validateParams = function(type,size){
-        if(typeof type != 'string'){
+        if(typeof type !== 'string'){
             throw new Error('Type parameter must be a string');
         }
-        if(typeof size != 'number'){
+        if(typeof size !== 'number'){
             throw new Error('Size parameter must be a number');
         }
     };

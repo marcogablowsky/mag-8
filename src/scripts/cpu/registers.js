@@ -38,5 +38,5 @@ MAG.mag8.Registers = function(){
         storeI: storeI,
         getI: getI,
         reset: reset
-    }
+    };
 };
