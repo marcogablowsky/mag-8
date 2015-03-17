@@ -153,7 +153,10 @@ MAG.mag8.CPU = function (memory,display,controls) {
     };
 
     var _handleTimers = function(){
-        //TODO: Timer handling on emulation cycle
+        timers.tick();
+        if(timers.getSound() > 0){
+            //TODO: trigger beep
+        }
     };
 
     var reset = function () {
@@ -161,7 +164,7 @@ MAG.mag8.CPU = function (memory,display,controls) {
         timers.reset();
         stack.reset();
         ip = 0x200;
-        stackPointer = null;
+        stackPointer = -1;
     };
 
     var emulateCycle = function () {
