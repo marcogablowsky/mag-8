@@ -225,9 +225,9 @@ describe('MAG8 opcode decoder:', function() {
             validateXArg(op,0x2);
         });
 
-        it('should decode 0xFx1E to ADDix with x argument', function(){
+        it('should decode 0xFx1E to ADDIx with x argument', function(){
             var op = decoder.decode(0xF21E);
-            validateRef(op, 'ADDix');
+            validateRef(op, 'ADDIx');
             validateXArg(op,0x2);
         });
 

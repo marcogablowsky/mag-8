@@ -6,12 +6,14 @@ MAG.mag8.OpcodeDecoder = function(){
         return {address: opcode & 0x0FFF};
     };
 
-    var _xkkArgs = function(opcode){
-        return {x: (opcode & 0x0F00) >> 8, kk: opcode & 0x00FF};
-    };
-
     var _xArgs = function(opcode){
         return {x: (opcode & 0x0F00) >> 8};
+    };
+
+    var _xkkArgs = function(opcode){
+        var obj = _xArgs(opcode);
+        obj.kk = (opcode & 0x00FF);
+        return obj;
     };
 
     var _xyArgs = function(opcode){
@@ -60,7 +62,7 @@ MAG.mag8.OpcodeDecoder = function(){
             case 0x000A: return {ref: 'LDxK', args: _xArgs(opcode)};
             case 0x0015: return {ref: 'LDDtx', args: _xArgs(opcode)};
             case 0x0018: return {ref: 'LDStx', args: _xArgs(opcode)};
-            case 0x001E: return {ref: 'ADDix', args: _xArgs(opcode)};
+            case 0x001E: return {ref: 'ADDIx', args: _xArgs(opcode)};
             case 0x0029: return {ref: 'LDFx', args: _xArgs(opcode)};
             case 0x0033: return {ref: 'LDBx', args: _xArgs(opcode)};
             case 0x0055: return {ref: 'LDIx', args: _xArgs(opcode)};

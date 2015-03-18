@@ -37,6 +37,28 @@ MAG.mag8.CPU = function (memory,display,controls) {
             ip = args.address;
         },
 
+        DRWxyn: function(args){
+            // no collision
+            registers.storeV(0xf, 0);
+
+            var registerX = registers.getV(args.x);
+            var registerY = registers.getV(args.y);
+            var x, y, spr;
+
+            for (y = 0; y < args.n; y++) {
+                spr = mem.get(registers.getI() + y);
+                for (x = 0; x < 8; x++) {
+                    if ((spr & 0x80) > 0) {
+                        if (display.setPixel(registerX + x, registerY + y)) {
+                            // collision
+                            registers.storeV(0xf, 1);
+                        }
+                    }
+                    spr <<= 1;
+                }
+            }
+        },
+
         SExkk: function(args){
             if(registers.getV(args.x) === args.kk){
                 ip += 2; // skip one instruction
@@ -85,6 +107,48 @@ MAG.mag8.CPU = function (memory,display,controls) {
             registers.storeV(args.x, registers.getV(args.y));
         },
 
+        LDxDt: function(args){
+            registers.storeV(args.x, timers.getDelay());
+        },
+
+        LDxK: function(){
+            //TODO: implement. Stops all execution until key is pressed. Stores key to Vx.
+        },
+
+        LDDtx: function(args){
+            timers.setDelay(registers.getV(args.x));
+        },
+
+        LDStx: function(args){
+            timers.setSound(registers.getV(args.x));
+        },
+
+        LDFx: function(args){
+            // Multiply by number of rows per character.
+            registers.storeI(registers.getV(args.x) * 5);
+        },
+
+        LDBx: function(args){
+            var number = registers.getV(args.x), i;
+
+            for (i = 3; i > 0; i--) {
+                mem.store(parseInt(number % 10),registers.getI() + i - 1);
+                number /= 10;
+            }
+        },
+
+        LDIx: function(args){
+            for (var i = 0; i <= args.x; i++) {
+                mem.store(registers.getV(i), registers.getI() + i);
+            }
+        },
+
+        LDxI: function(args){
+            for (var i = 0; i <= args.x; i++) {
+                registers.storeV(i, mem.get(registers.getI() + i));
+            }
+        },
+
         ADDxkk: function(args){
             var newVal = registers.getV(args.x) + args.kk;
             if(newVal > 0xff){
@@ -100,6 +164,10 @@ MAG.mag8.CPU = function (memory,display,controls) {
                 sum -= 0xfff;
             }
             registers.storeV(args.x, sum);
+        },
+
+        ADDIx: function(args){
+            registers.storeI(registers.getI() + registers.getV(args.x));
         },
 
         SUBxy: function(args){
