@@ -6,18 +6,31 @@ MAG.mag8.Display = function() {
 
     var display = new Array(width * height);
 
+    var _wrap = function(val, maxVal){
+        if (val > maxVal) {
+            val -= maxVal;
+        } else if (val < 0) {
+            val += maxVal;
+        }
+        return val;
+    };
+
     var reset = function(){
         for(var i=0; i < display.length; i++){
             display[i] = false;
         }
     };
 
-    var draw = function(){
+    var setPixel = function(x,y){
+        _wrap(x, width);
+        _wrap(y,height);
 
+        display[y * width + x] ^= 1;
+        return !display[y * width + x];
     };
 
     return {
-        draw: draw,
+        setPixel: setPixel,
         reset: reset
     };
 };

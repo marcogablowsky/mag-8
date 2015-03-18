@@ -7,9 +7,9 @@ describe('MAG8 display:', function() {
     });
 
     describe('interface', function() {
-        it('should define a draw method', function () {
-            expect(display.draw).toBeDefined();
-            expect(typeof display.draw).toEqual('function');
+        it('should define a setPixel method', function () {
+            expect(display.setPixel).toBeDefined();
+            expect(typeof display.setPixel).toEqual('function');
         });
 
         it('should define a reset method', function () {
