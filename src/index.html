@@ -16,7 +16,22 @@
 
 <script src="scripts/display.js"></script>
 <script src="scripts/controls.js"></script>
+<script src="scripts/vm-debugger.js"></script>
 <script src="scripts/vm.js"></script>
+
+<script>
+    var vmDebug = MAG.mag8.Debugger();
+    var vm = MAG.mag8.VM(vmDebug);
+
+    xhr = new XMLHttpRequest();
+    xhr.open("GET", "../roms/PONG", true);
+    xhr.responseType = "arraybuffer";
+    xhr.onload = function () {
+        vm.loadProgram(new Uint8Array(xhr.response));
+    };
+    xhr.send();
+
+</script>
 
 </body>
 </html>

@@ -1,6 +1,6 @@
 'use strict';
 
-MAG.mag8.VM = function() {
+MAG.mag8.VM = function(debug) {
 
     var memory = MAG.mag8.Memory('8-bit',0x1000);
     var display = MAG.mag8.Display();
@@ -8,6 +8,10 @@ MAG.mag8.VM = function() {
     var cpu = MAG.mag8.CPU(memory,display,controls);
 
     var running = false;
+
+    if(debug){
+        debug.setObjects(memory,display);
+    }
 
     var _initMemory = function(){
         for(var i = 0; i < MAG.mag8.Constants.hexChars.length; i++){
