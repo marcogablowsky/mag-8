@@ -31,6 +31,11 @@ describe('MAG8 virtual machine:', function() {
             expect(vm.isRunning).toBeDefined();
             expect(typeof vm.isRunning).toEqual('function');
         });
+
+        it('should define a loadProgram method', function () {
+            expect(vm.loadProgram).toBeDefined();
+            expect(typeof vm.loadProgram).toEqual('function');
+        });
     });
 
     describe('behaviour', function() {

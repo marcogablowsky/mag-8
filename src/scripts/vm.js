@@ -39,6 +39,12 @@ MAG.mag8.VM = function() {
         return running;
     };
 
+    var loadProgram = function (program) {
+        for (var i = 0; i < program.length; i++) {
+            memory.store(program[i],0x200 + i);
+        }
+    };
+
     // initialize memory on creation
     _initMemory();
 
@@ -47,7 +53,8 @@ MAG.mag8.VM = function() {
         step: step,
         start: start,
         stop: stop,
-        isRunning: isRunning
+        isRunning: isRunning,
+        loadProgram: loadProgram
     };
 
 };
