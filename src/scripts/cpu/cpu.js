@@ -161,7 +161,7 @@ MAG.mag8.CPU = function (memory,display,controls) {
             var sum = registers.getV(args.x) + registers.getV(args.y);
             registers.storeV(0xf, +(sum > 0xff)); // carry flag, 0 or 1
             if(sum > 0xff){
-                sum -= 0xfff;
+                sum -= 0x100;
             }
             registers.storeV(args.x, sum);
         },
@@ -174,7 +174,7 @@ MAG.mag8.CPU = function (memory,display,controls) {
             var diff = registers.getV(args.x) - registers.getV(args.y);
             registers.storeV(0xf, +(registers.getV(args.x) > registers.getV(args.y))); // carry flag, 0 or 1
             if(diff < 0){
-                diff += 0xfff;
+                diff += 0x100;
             }
             registers.storeV(args.x, diff);
         },
@@ -183,7 +183,7 @@ MAG.mag8.CPU = function (memory,display,controls) {
             var diff = registers.getV(args.y) - registers.getV(args.x);
             registers.storeV(0xf, +(registers.getV(args.y) > registers.getV(args.x)));
             if (diff < 0) {
-                diff += 0xfff;
+                diff += 0x100;
             }
             registers.storeV(args.x, diff);
         },
@@ -209,7 +209,7 @@ MAG.mag8.CPU = function (memory,display,controls) {
             registers.storeV(0xf, registers.getV(args.x) & 0x80);
             var val = registers.getV(args.x) << 1;
             if(val > 0xff){
-                val -= 0xfff;
+                val -= 0x100;
             }
             registers.storeV(args.x, val);
         },
