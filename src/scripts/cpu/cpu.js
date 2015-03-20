@@ -111,7 +111,8 @@ MAG.mag8.CPU = function (memory,display,controls) {
             registers.storeV(args.x, timers.getDelay());
         },
 
-        LDxK: function(){
+        LDxK: function(args){
+            console.log('Unimplemented function LDxK was called with args '+args);
             //TODO: implement. Stops all execution until key is pressed. Stores key to Vx.
         },
 
@@ -220,7 +221,7 @@ MAG.mag8.CPU = function (memory,display,controls) {
 
     };
 
-    var _handleTimers = function(){
+    var handleTimers = function(){
         timers.tick();
         if(timers.getSound() > 0){
             //TODO: trigger beep
@@ -249,12 +250,11 @@ MAG.mag8.CPU = function (memory,display,controls) {
         } else {
             throw new Error('Undefined CPU operation detected: opcode ' + (opcode).toString(16));
         }
-
-        _handleTimers();
     };
 
     return {
         reset: reset,
-        emulateCycle: emulateCycle
+        emulateCycle: emulateCycle,
+        handleTimers: handleTimers
     };
 };
