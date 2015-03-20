@@ -12,7 +12,7 @@ document.addEventListener("keyup", function(event) {
 });
 
 xhr = new XMLHttpRequest();
-xhr.open("GET", "../roms/PONG", true);
+xhr.open("GET", "roms/PONG", true);
 xhr.responseType = "arraybuffer";
 xhr.onload = function () {
     vm.loadProgram(new Uint8Array(xhr.response));
