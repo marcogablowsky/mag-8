@@ -21,7 +21,7 @@ module.exports = function (config) {
 
         // list of files to exclude
         exclude: [
-
+            'src/scripts/bootstrap.js'
         ],
 
         // test results reporter to use

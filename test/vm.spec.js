@@ -2,6 +2,8 @@ describe('MAG8 virtual machine:', function() {
 
     var vm;
 
+    requestAnimationFrame = function(){};
+
     beforeEach(function () {
         vm = MAG.mag8.VM();
     });
