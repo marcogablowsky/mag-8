@@ -1,12 +1,12 @@
 'use strict';
 
 MAG.mag8.CanvasRenderer = function(canvas, width, height, pixelWidth, pixelHeight, fgColor, bgColor){
-    var ctx = canvas.getContext("2d");
+    var ctx = canvas.getContext('2d');
 
     var pixWidth = pixelWidth || 10;
     var pixHeight = pixelHeight || 10;
-    var onColor = fgColor || "#0f8";
-    var offColor = bgColor || "#444";
+    var onColor = fgColor || '#0f8';
+    var offColor = bgColor || '#444';
 
     var _setDimensions = function(pixWidth,pixHeight) {
         canvas.width = pixWidth * width;
