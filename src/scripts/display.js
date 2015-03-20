@@ -17,7 +17,7 @@ MAG.mag8.Display = function() {
 
     var reset = function(){
         for(var i=0; i < display.length; i++){
-            display[i] = false;
+            display[i] = 0;
         }
     };
 
@@ -29,8 +29,15 @@ MAG.mag8.Display = function() {
         return !display[y * width + x];
     };
 
+    var getPixel = function(index){
+        return display[index];
+    };
+
+    reset();
+
     return {
         setPixel: setPixel,
+        getPixel: getPixel,
         reset: reset
     };
 };
