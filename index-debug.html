@@ -21,8 +21,22 @@
     <button id="loadrom" class="button" onclick="vm.loadProgram(document.getElementById('rom').value)">Load</button>
 </div>
 
-<script src="scripts/mag-8.min.js"></script>
-<script src="bootstrap.js"></script>
+<script src="src/scripts/globals.js"></script>
+<script src="src/scripts/constants.js"></script>
+
+<script src="src/scripts/memory.js"></script>
+<script src="src/scripts/cpu/registers.js"></script>
+<script src="src/scripts/cpu/timers.js"></script>
+<script src="src/scripts/cpu/opcode-decoder.js"></script>
+<script src="src/scripts/cpu/cpu.js"></script>
+
+<script src="src/scripts/display.js"></script>
+<script src="src/scripts/controls.js"></script>
+<script src="src/scripts/canvas-renderer.js"></script>
+<script src="src/scripts/vm-debugger.js"></script>
+<script src="src/scripts/vm.js"></script>
+
+<script src="src/scripts/bootstrap.js"></script>
 
 </body>
 </html>
