@@ -112,7 +112,7 @@ MAG.mag8.CPU = function (memory,display,controls) {
         },
 
         LDxK: function(args){
-            console.log('Unimplemented function LDxK was called with args '+args);
+            console.log('Unimplemented function LDxK was called with args '+args.x);
             //TODO: implement. Stops all execution until key is pressed. Stores key to Vx.
         },
 
