@@ -10,7 +10,7 @@ var bases = {
 };
 
 var paths = {
-    scripts: ['src/**/*.js','!src/scripts/globals.js','!src/scripts/bootstrap.js'],
+    scripts: ['src/scripts/globals.js','src/**/*.js','!src/scripts/bootstrap.js'],
     scriptsTarget: '/scripts',
     html: ['index.html']
 };
