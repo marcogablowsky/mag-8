@@ -8,7 +8,7 @@ MAG.mag8.VM = function(renderer, debug) {
     var cpu = MAG.mag8.CPU(memory,display,controls);
 
     // basic clock is at 60Hz -> through requestAnimationFrame
-    var clockMultiplier = 29; // -> 1.74 MhZ
+    var multiplier = 29; // -> 1.74 MhZ
 
     var running = false;
 
@@ -22,6 +22,12 @@ MAG.mag8.VM = function(renderer, debug) {
         }
     };
 
+    var _render = function(display){
+        if (renderer) {
+            renderer.render(display);
+        }
+    };
+
     var _loop = function(cb) {
         var _cb = function() { cb(); requestAnimationFrame(_cb);};
         _cb();
@@ -29,12 +35,10 @@ MAG.mag8.VM = function(renderer, debug) {
 
     var _runInternal = function() {
         if (running) {
-            for (var i = 0; i < clockMultiplier; i++) {
+            for (var i = 0; i < multiplier; i++) {
                 cpu.emulateCycle();
             }
-            if (renderer) {
-                renderer.render(display);
-            }
+            _render(display);
             cpu.handleTimers();
         }
     };
@@ -45,6 +49,7 @@ MAG.mag8.VM = function(renderer, debug) {
         memory.reset();
         display.reset();
         _initMemory();
+        _render(display);
     };
 
     var resetCpuOnly = function(){
@@ -53,9 +58,7 @@ MAG.mag8.VM = function(renderer, debug) {
 
     var step = function(){
         cpu.emulateCycle();
-        if (renderer) {
-            renderer.render(display);
-        }
+        _render(display);
     };
 
     var start = function(){
@@ -83,8 +86,12 @@ MAG.mag8.VM = function(renderer, debug) {
         xhr.send();
     };
 
-    var setClockMultiplier = function(factor){
-        clockMultiplier = factor;
+    var clockMultiplier = function(factor){
+        if(factor){
+            multiplier = factor;
+            console.log('Multiplier at: '+multiplier);
+        }
+        return multiplier;
     };
 
     var keyPressed = function(key){
@@ -104,6 +111,7 @@ MAG.mag8.VM = function(renderer, debug) {
 
     // initialize memory on creation
     _initMemory();
+    _render(display);
 
     //kick off the main loop
     _loop(_runInternal);
@@ -116,7 +124,7 @@ MAG.mag8.VM = function(renderer, debug) {
         stop: stop,
         isRunning: isRunning,
         loadProgram: loadProgram,
-        setClockMultiplier: setClockMultiplier
+        clockMultiplier: clockMultiplier
     };
 
 };
