@@ -71,9 +71,16 @@ MAG.mag8.VM = function(renderer, debug) {
     };
 
     var loadProgram = function (program) {
-        for (var i = 0; i < program.length; i++) {
-            memory.store(program[i],0x200 + i);
-        }
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'roms/'+program, true);
+        xhr.responseType = 'arraybuffer';
+        xhr.onload = function () {
+            var prog = new Uint8Array(xhr.response);
+            for (var i = 0; i < prog.length; i++) {
+                memory.store(prog[i],0x200 + i);
+            }
+        };
+        xhr.send();
     };
 
     var setClockMultiplier = function(factor){
@@ -87,6 +94,13 @@ MAG.mag8.VM = function(renderer, debug) {
     var keyReleased = function(key){
         controls.keyReleased(key);
     };
+
+    document.addEventListener('keydown', function(event) {
+        keyPressed(event.keyCode);
+    });
+    document.addEventListener('keyup', function(event) {
+        keyReleased(event.keyCode);
+    });
 
     // initialize memory on creation
     _initMemory();
@@ -102,9 +116,7 @@ MAG.mag8.VM = function(renderer, debug) {
         stop: stop,
         isRunning: isRunning,
         loadProgram: loadProgram,
-        setClockMultiplier: setClockMultiplier,
-        keyPressed: keyPressed,
-        keyReleased: keyReleased
+        setClockMultiplier: setClockMultiplier
     };
 
 };
