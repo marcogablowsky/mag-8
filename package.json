@@ -1,20 +1,29 @@
 {
-    "name": "mag-8",
-    "version": "1.0.0",
-    "dependencies": {},
-    "devDependencies": {
-        "karma": "latest",
-        "karma-coverage": "latest",
-        "karma-jasmine": "latest",
-        "karma-phantomjs-launcher": "latest",
-        "karma-chrome-launcher": "latest",
-        "gulp": "latest",
-        "gulp-jshint": "latest",
-        "gulp-concat": "latest",
-        "gulp-clean": "latest",
-        "gulp-uglify": "latest"
-    },
-    "engines": {
-        "node": ">=0.10.0"
-    }
+  "name": "mag-8",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint-config-google": "^0.9.1",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "gulp": "latest",
+    "gulp-clean": "latest",
+    "gulp-concat": "latest",
+    "gulp-jshint": "latest",
+    "gulp-uglify": "latest",
+    "karma": "latest",
+    "karma-chrome-launcher": "latest",
+    "karma-coverage": "latest",
+    "karma-jasmine": "latest",
+    "karma-phantomjs-launcher": "latest",
+    "prettier": "^1.7.4"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
 }
