@@ -1,33 +1,33 @@
 'use strict';
 
 MAG.mag8.OpcodeDecoder = function() {
-  const _addressArgs = function(opcode) {
+  var _addressArgs = function(opcode) {
     return { address: opcode & 0x0fff };
   };
 
-  const _xArgs = function(opcode) {
+  var _xArgs = function(opcode) {
     return { x: (opcode & 0x0f00) >> 8 };
   };
 
-  const _xkkArgs = function(opcode) {
-    const obj = _xArgs(opcode);
+  var _xkkArgs = function(opcode) {
+    var obj = _xArgs(opcode);
     obj.kk = opcode & 0x00ff;
     return obj;
   };
 
-  const _xyArgs = function(opcode) {
-    const obj = _xArgs(opcode);
+  var _xyArgs = function(opcode) {
+    var obj = _xArgs(opcode);
     obj.y = (opcode & 0x00f0) >> 4;
     return obj;
   };
 
-  const _xynArgs = function(opcode) {
-    const obj = _xyArgs(opcode);
+  var _xynArgs = function(opcode) {
+    var obj = _xyArgs(opcode);
     obj.n = opcode & 0x000f;
     return obj;
   };
 
-  const _decode0xxx = function(opcode) {
+  var _decode0xxx = function(opcode) {
     switch (opcode) {
       case 0x00e0:
         return { ref: 'CLS' };
@@ -36,7 +36,7 @@ MAG.mag8.OpcodeDecoder = function() {
     }
   };
 
-  const _decode8xxx = function(opcode) {
+  var _decode8xxx = function(opcode) {
     switch (opcode & 0x000f) {
       case 0x0:
         return { ref: 'LDxy', args: _xyArgs(opcode) };
@@ -59,7 +59,7 @@ MAG.mag8.OpcodeDecoder = function() {
     }
   };
 
-  const _decodeExxx = function(opcode) {
+  var _decodeExxx = function(opcode) {
     switch (opcode & 0x00ff) {
       case 0x009e:
         return { ref: 'SKPx', args: _xArgs(opcode) };
@@ -68,7 +68,7 @@ MAG.mag8.OpcodeDecoder = function() {
     }
   };
 
-  const _decodeFxxx = function(opcode) {
+  var _decodeFxxx = function(opcode) {
     switch (opcode & 0x00ff) {
       case 0x0007:
         return { ref: 'LDxDt', args: _xArgs(opcode) };
@@ -91,7 +91,7 @@ MAG.mag8.OpcodeDecoder = function() {
     }
   };
 
-  const decode = function(opcode) {
+  var decode = function(opcode) {
     switch (opcode & 0xf000) {
       case 0x0000:
         return _decode0xxx(opcode);

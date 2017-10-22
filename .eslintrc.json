@@ -11,8 +11,11 @@
     "prettier/prettier": "error",
     "quotes": ["error", "single"]
   },
+  "env": {
+    "browser": "true",
+    "jasmine": "true"
+  },
   "globals": {
-    "MAG": false,
-    "requestAnimationFrame": false
+    "MAG": false
   }
 }

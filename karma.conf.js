@@ -1,79 +1,69 @@
 'use strict';
-module.exports = function (config) {
-    config.set({
+module.exports = function(config) {
+  config.set({
+    // base path, that will be used to resolve files and exclude
+    basePath: '',
 
-        // base path, that will be used to resolve files and exclude
-        basePath: '',
+    // frameworks to use
+    frameworks: ['jasmine'],
 
-        // frameworks to use
-        frameworks: ['jasmine'],
+    // list of files / patterns to load in the browser
+    files: [
+      // Application scripts
+      'src/scripts/globals.js',
+      'src/scripts/**/*.js',
 
-        // list of files / patterns to load in the browser
-        files: [
-            // Application scripts
-            'src/scripts/globals.js',
-            'src/scripts/**/*.js',
+      // Test Files
+      'test/**/*.spec.js'
+    ],
 
-            // Test Files
-            'test/**/*.spec.js'
-        ],
+    // list of files to exclude
+    exclude: ['src/scripts/bootstrap.js'],
 
+    // test results reporter to use
+    // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
+    // 'coverage' can simply be added here to produce code coverage statistics
 
-        // list of files to exclude
-        exclude: [
-            'src/scripts/bootstrap.js'
-        ],
+    reporters: ['progress', 'coverage'],
 
-        // test results reporter to use
-        // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-        // 'coverage' can simply be added here to produce code coverage statistics
+    coverageReporter: {
+      type: 'html',
+      dir: 'test/coverage/'
+    },
 
-        reporters: ['progress', 'coverage'],
+    preprocessors: {
+      // define files to be scanned by karma-coverage plugin
+      'src/scripts/**/*.js': 'coverage'
+    },
 
-        coverageReporter: {
-            type : 'html',
-            dir : 'test/coverage/'
-        },
+    // web server port
+    port: 9876,
 
-        preprocessors: {
-            // define files to be scanned by karma-coverage plugin
-            'src/scripts/**/*.js': 'coverage'
-        },
+    // enable / disable colors in the output (reporters and logs)
+    colors: true,
 
-        // web server port
-        port: 9876,
+    // level of logging
+    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+    logLevel: config.LOG_INFO,
 
+    // enable / disable watching file and executing tests whenever any file changes
+    autoWatch: false,
 
-        // enable / disable colors in the output (reporters and logs)
-        colors: true,
+    // Start these browsers, currently available:
+    // - Chrome
+    // - ChromeCanary
+    // - Firefox
+    // - Opera
+    // - Safari (only Mac)
+    // - PhantomJS
+    // - IE (only Windows)
+    browsers: ['PhantomJS'],
 
+    // If browser does not capture in given timeout [ms], kill it
+    captureTimeout: 60000,
 
-        // level of logging
-        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-        logLevel: config.LOG_INFO,
-
-
-        // enable / disable watching file and executing tests whenever any file changes
-        autoWatch: false,
-
-
-        // Start these browsers, currently available:
-        // - Chrome
-        // - ChromeCanary
-        // - Firefox
-        // - Opera
-        // - Safari (only Mac)
-        // - PhantomJS
-        // - IE (only Windows)
-        browsers: ['PhantomJS'],
-
-
-        // If browser does not capture in given timeout [ms], kill it
-        captureTimeout: 60000,
-
-
-        // Continuous Integration mode
-        // if true, it capture browsers, run tests and exit
-        singleRun: true
-    });
+    // Continuous Integration mode
+    // if true, it capture browsers, run tests and exit
+    singleRun: true
+  });
 };

@@ -1,6 +1,10 @@
 {
   "name": "mag-8",
   "version": "1.0.0",
+  "scripts": {
+    "test": "karma start",
+    "build": "gulp"
+  },
   "dependencies": {},
   "devDependencies": {
     "eslint-config-google": "^0.9.1",
@@ -14,8 +18,8 @@
     "gulp": "latest",
     "gulp-clean": "latest",
     "gulp-concat": "latest",
-    "gulp-jshint": "latest",
     "gulp-uglify": "latest",
+    "jasmine-core": "2.8.0",
     "karma": "latest",
     "karma-chrome-launcher": "latest",
     "karma-coverage": "latest",
@@ -24,6 +28,6 @@
     "prettier": "^1.7.4"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=6.0.0"
   }
 }
